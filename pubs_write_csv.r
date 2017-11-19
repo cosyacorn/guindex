@@ -12,19 +12,19 @@ gs_ws_ls(pubs)
 
 pubs_data <- gs_read(ss=pubs, ws="pubs_f.csv")
 
-class(pubs_data)
-head(pubs_data)
-
 pubs_data$X1 <- NULL
 
 pubs_data$`Price of Guinness` <- lapply(pubs_data$`Price of Guinness`, gsub, pattern = "€", replacement = "")
-
 pubs_data$`Price of Guinness` <- lapply(pubs_data$`Price of Guinness`, gsub, pattern = "N.A.", replacement = NA)
-
-unique(pubs_data$`Price of Guinness`)
 
 pubs_data$`Price of Guinness` <- as.numeric(as.character(pubs_data$`Price of Guinness`))
 
 head(pubs_data)
 
 print(summary(pubs_data))
+
+hist(pubs_data$`Price of Guinness`,
+     breaks = seq(
+       min(pubs_data$`Price of Guinness`,na.rm = TRUE),
+       max(pubs_data$`Price of Guinness`,na.rm = TRUE),
+       by=0.1))
